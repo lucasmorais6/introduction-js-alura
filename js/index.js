@@ -4,37 +4,53 @@ var titulo = document.querySelector(".titulo") //buscar um elemento dentro do do
       titulo.textContent = "Novo nome"; //alterar o "valor" da variavel
  
 //calculo do IMC
-var paciente = document.querySelector("#primeiro");
-console.log(paciente);
+var pacientes = document.querySelectorAll(".paciente");
+console.log(pacientes);
 
-var tdPeso = paciente.querySelector(".info-peso");
-console.log(tdPeso);
-var peso = tdPeso.textContent;
-console.log(peso);
 
-var tdAltura= paciente.querySelector(".info-altura");
-var altura = tdAltura.textContent;
-console.log(altura);
+tamPacientes = pacientes.length
 
-var pesoValido = true;
-var alturaValida = true;
+for(  var i= 0; i< tamPacientes ; i++){
+  
+  var paciente = pacientes[i];
 
-if(peso <= 0 || peso >= 1000){
-  console.log("peso invalido");
-  pesoValido = false;
-  tdImc.textContent= "peso inválido";
-}
+  console.log(pacientes[i]);
+  
+  var tdPeso = paciente.querySelector(".info-peso");
+  console.log(tdPeso);
+  var peso = tdPeso.textContent;
+  console.log(peso);
+  
+  var tdAltura= paciente.querySelector(".info-altura");
+  var altura = tdAltura.textContent;
+  console.log(altura);
+  
+  var pesoValido = true;
+  var alturaValida = true;
+  
+  
+  var imc = peso/(Math.pow(altura,altura));
+  console.log(imc);
+  
+  if( alturaValida && pesoValido) {
+    var tdImc= paciente.querySelector(".info-imc");
+    tdImc.textContent= imc.toFixed(2); // para ficar duas casas decimais 
+  }
+  
+  if(peso <= 0 || peso >= 1000){
+    console.log("peso invalido");
+    tdImc.textContent = "peso inválido";
+    pesoValido = false;
 
-if(altura <= 0 || altura >=  1000){
-  console.log("altura invalida");
-  alturaValida = false;
-  tdImc.textContent= "altura inválido";
-}
+    paciente.classList.add("paciente-invalido");
+  }
+  
+  if(altura <= 0 || altura >=  1000){
+    console.log("altura invalida");
+    tdImc.textContent = "Altura inválida!";
+    alturaValida = false;
 
-var imc = peso/(Math.pow(altura,altura));
-console.log(imc);
+    paciente.classList.add("paciente-invalido");
 
-if( alturaValida && pesoValido) {
-  var tdImc= paciente.querySelector(".info-imc");
-  tdImc.textContent= imc; 
+  }
 }
